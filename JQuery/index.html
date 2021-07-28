@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <title>JQuery Assignment</title>
+   <style>
+          /* CSS GOES HERE */
+          button{
+              border-radius: 8px;
+              transition-duration: 0.5s;
+          }
+          button:hover{
+              background-color: red;
+          }
+          
+          .infoPallete{
+              background-color: black;
+              color: white;
+              transition-duration: 0.4s;
+              padding: 5px;
+          }
+
+          .infoPallete:hover{
+              background-color: sandybrown;
+              color: white;
+          }
+          
+   </style>
+</head>
+ 
+<body>
+   <div class="comments" style="border: 1px solid green;padding:1rem;margin-bottom: 0.5rem;">
+   </div>
+   <button id="load">Load Data</button>
+   <script>     //JQ LOGIC GOES HERE
+        $("#load").on("click", function (){
+            $.ajax({
+                type: 'GET',
+                url: 'https://jsonplaceholder.typicode.com/posts',
+                success: function(data){
+                    console.log('success', data);
+                    let t = 0;
+                    $.each( data, function(i, item){
+                        $('.comments').append('<div id="' + item.id +'" class="infoPallete"> <h3 class="title">'+ item.title +'</h3> <p class="body">'+ item.body +'</p></div>')
+                        $('.infoPallete').hide();
+                        t += 1000;
+                        $('.infoPallete').delay(t).fadeIn('fast');
+                    });
+                }
+            });
+        });
+   </script>
+</body>
+ </html> 
